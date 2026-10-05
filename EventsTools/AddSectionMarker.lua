@@ -23,7 +23,7 @@ Section_colors = {
 
 --Insert a Marker with the Section name provided
 ---@param sectionGroup string
----@param num? string default ""
+---@param num? string|integer default ""
 ---@param suffix? string default ""
 local function AddSectionMarker(sectionGroup,num,suffix)
 	if num == "##" then
@@ -41,11 +41,13 @@ local function AddSectionMarker(sectionGroup,num,suffix)
 		sectionText = (sectionGroup.."_"..num..suffix)
 	elseif suffix then
 		sectionText = (sectionGroup.."_"..suffix)
+	elseif num then
+		sectionText = (sectionGroup.."_"..num)
 	else
 		sectionText = (sectionGroup)
 	end
 	-- Insertar el evento de texto en la posición del cursor de reproducción
-	r.AddProjectMarker2(0,0,cursor_pos,0,sectionText,sectionNum,Section_colors[sectionGroup] or Section_colors.default)
+	r.AddProjectMarker2(0,false,cursor_pos,0,sectionText,sectionNum,Section_colors[sectionGroup] or Section_colors.default)
 
 end
 return AddSectionMarker

@@ -18,14 +18,18 @@ local unprccombo = {}
 --Function Definitions
 local function LoadSectionsFile()
     local file_path = reaper.GetResourcePath() .. "/Scripts/EventsTools/sections.txt"
-    local sectionsFile = io.open(file_path,"r")
-    for line in sectionsFile:lines() do
-        local marker_name, display_name = line:match('%[prc_(.-)%]%s*"(.-)"')
-        if marker_name and display_name then
-            -- Add ALL to validation list
-            table.insert(prc_unusedsections, marker_name)
-            table.insert(prc_section_names, display_name)
+    local sectionsFile = io.open(file_path,"r") or nil
+    if sectionsFile then 
+        for line in sectionsFile:lines() do
+            local marker_name, display_name = line:match('%[prc_(.-)%]%s*"(.-)"')
+            if marker_name and display_name then
+                -- Add ALL to validation list
+                table.insert(prc_unusedsections, marker_name)
+                table.insert(prc_section_names, display_name)
+            end
         end
+    else 
+        reaper.ShowMessageBox("sections.txt file not found in the EventsTools folder. Please make sure the file exists and try again.", "Error", 0)
     end
 end
 LoadSectionsFile()

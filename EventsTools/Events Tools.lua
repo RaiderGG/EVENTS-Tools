@@ -1,4 +1,3 @@
----@diagnostic disable: param-type-mismatch
 -- Setting directories for ImGui and scripts
 package.path = reaper.ImGui_GetBuiltinPath() .. '/?.lua'
 package.path = reaper.GetResourcePath() .. "/Scripts/EventsTools/?.lua;" .. package.path
@@ -6,6 +5,7 @@ local Im = require 'imgui' '0.9.3'
 local MarkersToSections = require "MarkersToSections"
 local AddTextEvent = require "AddTextEvent"
 local AddSectionMarker = require "AddSectionMarker"
+local version = "1.1"
 
 --Definitions
 local sizeX = 323
@@ -34,6 +34,7 @@ local function LoadSectionsFile()
     end
 end
 LoadSectionsFile()
+
 local sectionCount ={
     verse = {"##",1,2,3,4,5,6,7,8,9},
     preverse = {"##",1,2,3,4,5},
@@ -71,12 +72,19 @@ local ctx = Im.CreateContext('EVENTS Tools')
 local function loop()
     Im.SetNextWindowSize(ctx, sizeX, sizeY,Im.Cond_Appearing)
 
-    local visible, open = Im.Begin(ctx, 'EVENTS Tools', true, Im.WindowFlags_NoScrollbar | Im.WindowFlags_NoCollapse | Im.WindowFlags_NoResize)
+    local visible, open = Im.Begin(ctx, 'EVENTS Tools v' .. version, true, Im.WindowFlags_NoScrollbar | Im.WindowFlags_NoCollapse | Im.WindowFlags_NoResize)
     if visible then
         -- Marker tools section
-        Im.SeparatorText(ctx, 'Copy ALL Section markers to EVENTS Track')
+        Im.SeparatorText(ctx, 'Sections')
 
         -- Button for "Markers to Sections"
+        if Im.Button(ctx, 'Open Sections window', 307, 30) then
+            local center_x, center_y = Im.Viewport_GetCenter(Im.GetWindowViewport(ctx))
+            Im.SetNextWindowPos(ctx, (center_x + (0.5*sizeX)), center_y, Im.Cond_Appearing, 0, 0.5)
+            Im.SetNextWindowSize(ctx,787,sizeY)
+            Im.OpenPopup(ctx,'Add Sections')
+        end
+
         if Im.Button(ctx, 'Copy Markers to EVENTS track', 307, 30) then
             MarkersToSections()
         end
@@ -84,30 +92,30 @@ local function loop()
 		-- Music events section
         Im.SeparatorText(ctx,'Music Events')
 
-        if Im.Button(ctx, 'Add Music Start', 150, 30) then
+        if Im.Button(ctx, 'Music Start', 150, 30) then
             AddTextEvent('music_start')
         end
 
         Im.SameLine(ctx)
 
-        if Im.Button(ctx, 'Add Music End', 150, 30) then
+        if Im.Button(ctx, 'Music End', 150, 30) then
             AddTextEvent("music_end")
         end
 
-        if Im.Button(ctx, 'Add End', 150, 30) then
+        if Im.Button(ctx, 'End', 150, 30) then
             AddTextEvent("end")
         end
 
 		-- Crowd clap on/off section
         Im.SeparatorText(ctx,'Crowd Clap')
 
-        if Im.Button(ctx, 'Add Crowd Clap', 150, 30) then
+        if Im.Button(ctx, 'Crowd Clap', 150, 30) then
             AddTextEvent("crowd_clap")
         end
 
 		Im.SameLine(ctx)
 
-		if Im.Button(ctx, 'Add Crowd NoClap', 150, 30) then
+		if Im.Button(ctx, 'Crowd NoClap', 150, 30) then
             AddTextEvent("crowd_noclap")
         end
 
@@ -134,19 +142,8 @@ local function loop()
             AddTextEvent("crowd_realtime")
         end
 
-        -- Crowd clap section
-        Im.SeparatorText(ctx,'Add Section Markers')
 
-        if Im.Button(ctx, 'Open Sections Menu', 307, 30) then
-            local center_x, center_y = Im.Viewport_GetCenter(Im.GetWindowViewport(ctx))
-            Im.SetNextWindowPos(ctx, (center_x + (0.5*sizeX)), center_y, Im.Cond_Appearing, 0, 0.5)
-            Im.SetNextWindowSize(ctx,787,sizeY)
-            Im.OpenPopup(ctx,'Add Sections')
-            
-            
-        end
-
-        --Add Sections Menu
+        --Sections Window
         if Im.BeginPopupModal(ctx, 'Add Sections', nil,Im.WindowFlags_NoResize) then
             if not unprccombo.filter then
                 unprccombo = {

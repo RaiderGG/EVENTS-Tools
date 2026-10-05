@@ -23,19 +23,17 @@ Section_colors = {
 
 --Insert a Marker with the Section name provided
 ---@param sectionGroup string
----@param num? string|integer default ""
----@param suffix? string default ""
+---@param num? string|integer default nil
+---@param suffix? string default nil
 local function AddSectionMarker(sectionGroup,num,suffix)
 	if num == "##" then
-		num = ""
+		num = nil
 	end
 	if suffix == "##" then
-		suffix = ""
+		suffix = nil
 	end
 
 	local cursor_pos = r.GetCursorPosition()
-	--SectionGroup detect for coloring
-	--r.ShowConsoleMsg("section group: ".. sectionGroup)
 	local sectionNum = (r.GetNumRegionsOrMarkers(0)+1)
 	if num and suffix then
 		sectionText = (sectionGroup.."_"..num..suffix)
@@ -46,7 +44,7 @@ local function AddSectionMarker(sectionGroup,num,suffix)
 	else
 		sectionText = (sectionGroup)
 	end
-	-- Insertar el evento de texto en la posición del cursor de reproducción
+	-- Insert the marker on the current cursor position.
 	r.AddProjectMarker2(0,false,cursor_pos,0,sectionText,sectionNum,Section_colors[sectionGroup] or Section_colors.default)
 
 end

@@ -1,3 +1,4 @@
+---@diagnostic disable: param-type-mismatch
 -- Setting directories for ImGui and scripts
 package.path = reaper.ImGui_GetBuiltinPath() .. '/?.lua'
 package.path = reaper.GetResourcePath() .. "/Scripts/EventsTools/?.lua;" .. package.path
@@ -176,14 +177,14 @@ local function loop()
 
             Im.PushStyleVar(ctx,Im.StyleVar_FramePadding,0,6.5)
             Im.SetNextItemWidth(ctx,comboW)
-            if Im.BeginCombo(ctx,"##bridge",sel.bridge,Im.ComboFlags_HeightLarge) then
+            if Im.BeginCombo(ctx,"##bridge",tostring(sel.bridge),Im.ComboFlags_HeightLarge) then
                 for i,v in ipairs(sectionCount.bridge) do
-                    local is_sel = sel.bridge == i
+                    local is_sel = sel.bridge == v
                     if Im.Selectable(ctx, sectionCount.bridge[i], is_sel) then
                         sel.bridge = sectionCount.bridge[i]
                     end
 
-                    if sel then
+                    if sel.bridge then
                         Im.SetItemDefaultFocus(ctx)
                     end
                 end
@@ -212,12 +213,12 @@ local function loop()
             if Im.BeginCombo(ctx,"##preverse",sel.preverse,Im.ComboFlags_HeightLarge) then
                 
                 for i,v in ipairs(sectionCount.preverse) do
-                    local is_sel = sel.preverse == i
+                    local is_sel = sel.preverse == v
                     if Im.Selectable(ctx, sectionCount.preverse[i], is_sel) then
                         sel.preverse = sectionCount.preverse[i]
                     end
 
-                    if sel then
+                    if sel.preverse then
                         Im.SetItemDefaultFocus(ctx)
                     end
                 end
@@ -246,7 +247,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##interlude",sel.interlude,Im.ComboFlags_HeightLarge) then
                 for i,v in ipairs(sectionCount.interlude) do
-                    local is_sel = sel.interlude == i
+                    local is_sel = sel.interlude == v
                     if Im.Selectable(ctx, sectionCount.interlude[i], is_sel) then
                         sel.interlude = sectionCount.interlude[i]
                     end
@@ -278,7 +279,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##verse",sel.verse,Im.ComboFlags_HeightLarge | Im.WindowFlags_NoScrollbar) then
                 for i,v in ipairs(sectionCount.verse) do
-                    local is_sel = sel.verse == i
+                    local is_sel = sel.verse == v
                     if Im.Selectable(ctx, sectionCount.verse[i], is_sel) then
                         sel.verse = sectionCount.verse[i]
                     end
@@ -311,7 +312,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##gtr_solo",sel.gtr_solo,Im.ComboFlags_HeightRegular) then
                 for i,v in ipairs(sectionCount.gtr_solo) do
-                    local is_sel = sel.gtr_solo == i
+                    local is_sel = sel.gtr_solo == v
                     if Im.Selectable(ctx, sectionCount.gtr_solo[i], is_sel) then
                         sel.gtr_solo = sectionCount.gtr_solo[i]
                     end
@@ -343,7 +344,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##postverse",sel.postverse,Im.ComboFlags_HeightLarge) then
                 for i,v in ipairs(sectionCount.postverse) do
-                    local is_sel = sel.postverse == i
+                    local is_sel = sel.postverse == v
                     if Im.Selectable(ctx, sectionCount.postverse[i], is_sel) then
                         sel.postverse = sectionCount.postverse[i]
                     end
@@ -376,7 +377,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##bass_solo",sel.bass_solo,Im.ComboFlags_HeightLarge) then
                 for i,v in ipairs(sectionCount.bass_solo) do
-                    local is_sel = sel.bass_solo == i
+                    local is_sel = sel.bass_solo == v
                     if Im.Selectable(ctx, sectionCount.bass_solo[i], is_sel) then
                         sel.bass_solo = sectionCount.bass_solo[i]
                     end
@@ -409,7 +410,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##prechorus",sel.prechorus,Im.ComboFlags_HeightLarge) then
                 for i,v in ipairs(sectionCount.prechorus) do
-                    local is_sel = sel.prechorus == i
+                    local is_sel = sel.prechorus == v
                     if Im.Selectable(ctx, sectionCount.prechorus[i], is_sel) then
                         sel.prechorus = sectionCount.prechorus[i]
                     end
@@ -442,7 +443,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##drum_solo",sel.drum_solo,Im.ComboFlags_HeightLarge) then
                 for i,v in ipairs(sectionCount.drum_solo) do
-                    local is_sel = sel.drum_solo == i
+                    local is_sel = sel.drum_solo == v
                     if Im.Selectable(ctx, sectionCount.drum_solo[i], is_sel) then
                         sel.drum_solo = sectionCount.drum_solo[i]
                     end
@@ -475,7 +476,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##chorus",sel.chorus,Im.ComboFlags_HeightLarge) then
                 for i,v in ipairs(sectionCount.chorus) do
-                    local is_sel = sel.chorus == i
+                    local is_sel = sel.chorus == v
                     if Im.Selectable(ctx, sectionCount.chorus[i], is_sel) then
                         sel.chorus = sectionCount.chorus[i]
                     end
@@ -508,7 +509,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##main_riff",sel.main_riff,Im.ComboFlags_HeightLarge) then
                 for i,v in ipairs(sectionCount.main_riff) do
-                    local is_sel = sel.main_riff == i
+                    local is_sel = sel.main_riff == v
                     if Im.Selectable(ctx, sectionCount.main_riff[i], is_sel) then
                         sel.main_riff = sectionCount.main_riff[i]
                     end
@@ -541,7 +542,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##postchorus",sel.postchorus,Im.ComboFlags_HeightLarge) then
                 for i,v in ipairs(sectionCount.postchorus) do
-                    local is_sel = sel.postchorus == i
+                    local is_sel = sel.postchorus == v
                     if Im.Selectable(ctx, sectionCount.postchorus[i], is_sel) then
                         sel.postchorus = sectionCount.postchorus[i]
                     end
@@ -574,7 +575,7 @@ local function loop()
             Im.SetNextItemWidth(ctx,comboW)
             if Im.BeginCombo(ctx,"##chorus_riff",sel.chorus_riff,Im.ComboFlags_HeightLarge) then
                 for i,v in ipairs(sectionCount.chorus_riff) do
-                    local is_sel = sel.chorus_riff == i
+                    local is_sel = sel.chorus_riff == v
                     if Im.Selectable(ctx, sectionCount.chorus_riff[i], is_sel) then
                         sel.chorus_riff = sectionCount.chorus_riff[i]
                     end
@@ -618,7 +619,7 @@ local function loop()
                 Im.TextFilter_Draw(unprccombo.filter, ctx, '##Filter',-(Im.NumericLimits_Float()))
                 
                 for i,v in ipairs(prc_unusedsections) do
-                    local is_sel = prc_section_names == i
+                    local is_sel = prc_section_names == v
                     if Im.TextFilter_PassFilter(unprccombo.filter,prc_section_names[i]) then
                         if Im.Selectable(ctx, prc_section_names[i], is_sel) then
                             unprccombo.selidx = i

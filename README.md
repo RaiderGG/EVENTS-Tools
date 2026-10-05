@@ -1,31 +1,35 @@
 # **EVENTS Tools**  
-This set of scripts Will help getting Practice Sections easily on your chart, you can also place events like **[music_start]**, **[music_end]**, **[end]**, or any Crowd Clapping event from here!  
+EVENTS Tools is a ReaScript set for Rock Band 3/YARG authoring workflow. It lets you events like [music_start], [music_end], [end], and crowd clap trigger and intensity events easily. It also includes a way to place RB3-style sections as Reaper project markers and lets you copy them directly into the EVENTS track with proper formatting.
   
-![image](https://github.com/user-attachments/assets/b61dac68-d327-4e99-b04e-a7a43868f3e6)
+![Main window](./assets/screenshots/main.jpg "Main Window")
   
-## **Requirements**  
-The only thing you'll need to have installed is **ReaImGui**. You can install it via **ReaPack**.  
-you can find it here! https://reapack.com/  
+## Tools  
+### Markers and practice sections tools  
+Here you can copy your section markers  
   
-## Markers and practice sections tools  
-Here you'll find the Markers to Sections tool, i'm looking to add a Delete Sections tool too.  
+### Sections 
+Here you can add RB3 Sections as project markers. You can also copy all markers as text events on the EVENTS track.
   
-### Markers to sections  
-This tool is self-explainable. It copys Reaper markers and adds them into the EVENTS track as Text Events with the proper **[prc_(section)]** format.  
-  
-![image](https://github.com/user-attachments/assets/36a21f33-ed87-4c44-83f0-6319342263ff)
-  
-## Music events  
-Here you'll find the tools to add [music_start], [music_end], and [end] events. They're placed at the Play Cursor's position.  
-  
-![image](https://github.com/user-attachments/assets/5b021182-1163-4fbb-b382-dbfac349d4b0)  
+### Music events  
+Here you can add **[music_start]**, **[music_end]**, and **[end]** events. They're placed at the edit cursor's position.    
 
-## Crowd Clap  
-These tools allow you to activate or deactivating the crowd's claps. They work exactly as the Music events tools.  
+### Crowd Clap  
+Here you can activate or deactivating the crowd's claps. They work exactly as the Music events tools.  
   
-![image](https://github.com/user-attachments/assets/e91a72f3-82d9-4428-ae78-408426d0c1e4)
+### Crowd intensity  
+Here you can change the intensity of the crowd between **mellow**, **normal**, **intense**, or **realtime** (not bpm based).
+
+## Add Section Markers
+This window lets you add any RB3 section markers as project markers 
   
-## Crowd intensity  
-You can change the intensity of the crowd between **mellow**, **normal**, **intense**, or **realtime**.  
-  
-![image](https://github.com/user-attachments/assets/6ef45ae0-4588-499d-9585-73086225fd4a)
+![Add Sections Window](./assets/screenshots/sections.jpg "Add Sections Window")
+
+You can also search for any other RB3 section on the search box and place it with the button on its side
+
+![Search box](./assets/screenshots/search.jpg "Search Box Example")
+
+## **Requirements** 
+This ReaScript set is included in MiloHax's [REAPER Charting Setup](https://guides.milohax.org/en/charting/reaper/intro/) guide, so if you downloaded everything from there, you don't need to install anything.
+
+Otherwise, the only thing you'll need to have installed is **ReaImGui**. You can install it via [ReaPack](https://reapack.com/).  
+
